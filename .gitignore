@@ -1,3 +1,5 @@
 auth.cfg
 __pycache__
 *.swp
+test.py
+*.~
