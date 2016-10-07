@@ -55,10 +55,10 @@ def get_secrets( file_name ):
 
 
 @click.command()
-@click.option('--word', prompt='Find hashtag:', default='MI-PYT', help='Word you want to find hashtags for.')
-@click.option('--cfg_file', prompt='Your twitter secrets file:', default='auth.cfg', help='File consisting of twitter key and secret.')
-@click.option('--begin', default=5 , help='How many tweets do you want to show at beginning.')
-@click.option('--period', default=5 , help='Period of updating by new tweets (seconds).')
+@click.option('--word', prompt='Find hashtag:', default='MI-PYT', help='Find the tweets for hastag.')
+@click.option('--cfg_file', prompt='Your twitter secrets file:', default='auth.cfg', help='Add a file consisting of twitter key and secret.')
+@click.option('--begin', default=5 , help='Show how many tweets do you want to show at beginning.')
+@click.option('--period', default=5 , help='Set update period for new tweets (seconds).')
 def get_twitter_wall( word, cfg_file,  begin , period ):
 
   session = twitter_session( *get_secrets( cfg_file ) )
@@ -67,19 +67,19 @@ def get_twitter_wall( word, cfg_file,  begin , period ):
 
   while( True ):
 
-    print( 20 * '*')
-
-
     r = session.get('https://api.twitter.com/1.1/search/tweets.json',
                     params={'q': '#'+word, 'count': begin, 'result_type': 'recent', 'since_id': max_id }, )
 
     max_id = r.json()['search_metadata']['max_id']
     begin = 100
 
-    for tweet in r.json()['statuses']:
-      print (20 * '-')
-      print(tweet['text'])
-      print (20 * '-')
+    if ( len( r.json()['statuses']  ) > 0 ):
+
+      print( 10 * '*' ,  time.strftime("%H:%M:%S", time.gmtime()) , 10 * '*'  )
+
+      for tweet in r.json()['statuses']:
+        print(tweet['text'])
+        print (20 * '-')
 
     time.sleep(period)
 
