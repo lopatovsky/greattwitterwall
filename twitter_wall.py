@@ -59,7 +59,8 @@ def get_secrets( file_name ):
 @click.option('--cfg_file', prompt='Your twitter secrets file:', default='auth.cfg', help='Add a file consisting of twitter key and secret.')
 @click.option('--begin', default=5 , help='Show how many tweets do you want to show at beginning.')
 @click.option('--period', default=5 , help='Set update period for new tweets (seconds).')
-def get_twitter_wall( word, cfg_file,  begin , period ):
+@click.option('--lang', default='en' , help='Specify the language of tweets [en,cs,zh... ].')
+def get_twitter_wall( word, cfg_file,  begin , period, lang ):
 
   session = twitter_session( *get_secrets( cfg_file ) )
 
@@ -68,7 +69,8 @@ def get_twitter_wall( word, cfg_file,  begin , period ):
   while( True ):
 
     r = session.get('https://api.twitter.com/1.1/search/tweets.json',
-                    params={'q': '#'+word, 'count': begin, 'result_type': 'recent', 'since_id': max_id }, )
+                    params={'q': '#'+word, 'count': begin, 'result_type': 'recent',
+                    'since_id': max_id, 'lang' : lang }, )
 
     max_id = r.json()['search_metadata']['max_id']
     begin = 100
