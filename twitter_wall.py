@@ -19,6 +19,7 @@ import requests
 import base64
 import configparser
 import time
+import click
 
 def twitter_session(api_key, api_secret):
 
@@ -44,14 +45,23 @@ def twitter_session(api_key, api_secret):
   session.auth = bearer_auth
   return session
 
-def get_secrets():
+
+def get_secrets( file_name ):
 
   config = configparser.ConfigParser()
-  config.read('auth.cfg')
+  config.read( file_name )
   return ( config['twitter']['key'], config['twitter']['secret'] )
 
 
-def get_twitter_wall( word, num, time_type ):
+
+@click.command()
+@click.option('--word', prompt='Find hashtag:', default='MI-PYT', help='Word you want to find hashtags for.')
+@click.option('--cfg_file', prompt='Your twitter secrets file:', default='auth.cfg', help='File consisting of twitter key and secret.')
+@click.option('--begin', default=5 , help='How many tweets do you want to show at beginning.')
+@click.option('--period', default=5 , help='Period of updating by new tweets (seconds).')
+def get_twitter_wall( word, cfg_file,  begin , period ):
+
+  session = twitter_session( *get_secrets( cfg_file ) )
 
   max_id = 0
 
@@ -60,45 +70,25 @@ def get_twitter_wall( word, num, time_type ):
     print( 20 * '*')
 
 
-    r = session.get('https://api.twitter.com/1.1/search/tweets.json',params={'q': '#'+word, 'count': num, 'result_type': time_type, 'since_id': max_id }, )
+    r = session.get('https://api.twitter.com/1.1/search/tweets.json',
+                    params={'q': '#'+word, 'count': begin, 'result_type': 'recent', 'since_id': max_id }, )
 
     max_id = r.json()['search_metadata']['max_id']
-    num = 100
+    begin = 100
 
     for tweet in r.json()['statuses']:
       print (20 * '-')
       print(tweet['text'])
       print (20 * '-')
 
-    time.sleep(5)
+    time.sleep(period)
 
-
-def get_arguments():
-  return 1;
-
-'''
-import click
-
-@click.command()
-@click.option('--count', default=1, help='Number of greetings.')
-@click.option('--name', prompt='Your name',
-              help='The person to greet.')
-def hello(count, name):
-    """Simple program that greets NAME for a total of COUNT times."""
-    for x in range(count):
-        click.echo('Hello {}!'.format(name))
-
-'''
 
 if __name__ == '__main__':
-  #hello()
-
-  get_arguments()
-
-  session = twitter_session( *get_secrets() )
 
 
-  get_twitter_wall( 'travel', 5, 'recent'  )
+  # session = twitter_session( *get_secrets() ) # TODO -> predat session ako parameter do get_twitter_wall
+  get_twitter_wall()
 
 
 
