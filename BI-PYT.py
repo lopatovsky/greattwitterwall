@@ -38,13 +38,57 @@ def change_string( x ):
 
 def mutable_immutable():
 
-  a = [5,2,3]; # mutable  - {bytearray, list, set, dict }
-  b = (5,2,3); # immutable
+  a = [5,2,3]; # mutable  - {bytearray, list, set, dict }  -  ( passed by reference )
+  b = (5,2,3); # immutable - ( passed by value )
   s = "string"; # immutable
   change_list(a);  print(a)
   change_tuple(b); print(b)
   change_string(s);print(s)
 
+def format():
+  print (1)
+  print ( "Prvek {0} by měl mít průměr {1:.3} cm.".format( 'cosi', 2/3 ) )
+  print ( "Prvek {jmeno} by měl mít průměr {prumer:.3} cm.".format(
+                                                    jmeno='cosi',
+                                                    prumer=1/3 ,
+                                                  ))
+
+def tuple_test():
+  t = ('ahoj', 234, ['a', 3, 5],);
+  t = 'ahoj', 234, ['a', 3, 5],; # the same
+  print( dir(t) )
+  ##a, b = b, a # swap(a,b)
+
+  a, *b, c = 'první', 1, 2, 'ahoj', 'poslední'
+  print(a)
+  print(b)
+  print(c)
+
+def dict_test():
+  d = { 'a': 1, 'b': [1,2,3], 'c': "ahoj", }
+  d['a'] = "svet"
+  d[123] = (1, 'tuple')
+  del d['c']
+  print(d)
+  for i in d:
+    print(i)
+
+  for (key, val) in d.items():
+    print( key, val, sep=': ' )
+
+
+def sorting():
+  xs = [ ('Láďa', 2), ('Jana', 2), ('Jana', 1), ('Karel', 3) ]
+  print(sorted(xs)) #Python obecně bude třídit všechny objekty, které interně implementují „magickou“ metodu __lt__(), tedy menší než, pro porovnání svých prvků. Ve výchozím stavu to znamená všechny předdefinované typy.
+  print( sorted( xs, key = lambda c: c[0] ) )
+  print( sorted( xs, key = lambda c: c[1] ) )
+  ## xs.sort()  -- change the list.
+
+def generators():
+  xs = range(1, 9)
+  # list(xs) # to list
+  print(  [2**n for n in xs] )
+  print(  [n for n in xs if n % 2 == 0] )
 
 if __name__ == '__main__':
 
@@ -53,3 +97,9 @@ if __name__ == '__main__':
   print( qs([5,4,4,2,45,3,8]) );
 
   mutable_immutable()
+  format()
+  tuple_test()
+  dict_test();
+  sorting()
+  generators()
+  print( 'it is true' if 2 == 3 else 'it is false'  )  #ternar operator
