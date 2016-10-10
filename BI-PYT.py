@@ -90,6 +90,60 @@ def generators():
   print(  [2**n for n in xs] )
   print(  [n for n in xs if n % 2 == 0] )
 
+def for_test():
+
+  for i in range(10): ## for else -- similar while
+    if i > 2 : break
+    print(i)
+  else:
+    print ("print only if for runs till end")
+
+  #####
+
+  for i, word in enumerate(["welcome", "to", "python"]):
+    print(i, word)
+
+  print( list( range(5) ) )
+  print( list( range(4,6) ) )
+  print( list( range(1,7,2) ) )
+
+def with_test():
+  #with -> netreba zatvarat subor, nie je treba riesit vynimky
+  with open('README.md', mode='r', encoding='utf-8') as soubor:
+    for i, řádka in enumerate(soubor):
+        print(i, řádka)
+
+def print_test():
+  s1, s2, s3 = 'ahoj', 'světe', 'jak se máš'
+  print( s1, s2, s3, sep='; ', end='\n')
+
+def input_test():
+  answer = input('Zadej text: ')
+  print('Zadal si', answer )
+
+### class MojeTridaEx( Exception ):   # dedeni
+'''
+# atributy, jejichž jméno začíná alespoň dvěma podtržítky a končí podtržítkem nejvýše jedním se budou jako privátní tvářit
+__call__()
+uvedené třídy (jejich instance) se budou chovat jako funkce (půjde je zavolat)
+__enter__()
+__exit__()
+uvedené třídy bude možné použít uvnitř bloku with
+__len__()
+__contains__(x)
+uvedené třídy se budou chovat jako množiny (tedy bude možné na ně aplikovat množinové operace)
+__iter__()
+__next__()
+__reversed__()
+uvedené třídy se budou chovat jako iterátory
+'''
+
+class MyClass:
+
+  pass
+
+
+
 if __name__ == '__main__':
 
   strings()
@@ -103,3 +157,12 @@ if __name__ == '__main__':
   sorting()
   generators()
   print( 'it is true' if 2 == 3 else 'it is false'  )  #ternar operator
+  for_test()
+  with_test()
+  print_test()
+  #input_test()
+
+  print( dir( 'ahoj' ) )  ## GET all methods and magic methods
+
+
+
