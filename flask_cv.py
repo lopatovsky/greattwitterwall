@@ -7,10 +7,3 @@ def hello():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-    ##########################3333
-
-    python anywhere.
-    #treba virtualenv.
-    virtualenv --python=python3.5 env
