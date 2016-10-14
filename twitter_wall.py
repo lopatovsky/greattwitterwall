@@ -100,15 +100,13 @@ def console(  word, cfg_file,  begin , period, lang ):
 ############web_application########################################################################
 
 from flask import Flask
+from flask import render_template
 app = Flask(__name__)
 
 @app.route('/')
-def index():
-    return 'MI-PYT cool Twitter wall'
-
 @app.route('/<word>/')
-def find_word(word):
-    return 'Find ' + word
+def index(word=None):
+    return render_template('index.html', word=word)
 
 @cli.command()
 def web():
