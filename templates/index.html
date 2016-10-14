@@ -1,11 +1,23 @@
 <!doctype html>
+<html>
+<head>
 <title>Hello from Flask</title>
+<style>
+
+.item {
+    background: #f5f2ff;
+    margin: 5px;
+    padding: 5px;
+}
+</style>
+</head>
+<body>
 <h1> Cool Twitter-wall! </h1>
 {% if word %}
   <h2>Tweets for the #{{ word }}!</h2>
     <ul>
     {% for tweet in tweets_list %}
-      <li>
+      <li class="item">
          <h3 class="username">{{ tweet['user']['name'] }}</h3>
          <img src="{{ tweet['user']['profile_image_url'] }}">
          <p class="time_created"> {{ tweet['created_at'] }}</p>
@@ -17,15 +29,27 @@
          {% endfor %} 
           </p>         
           <p class="text"> {{ tweet['text'] }}</p>
+          <div class="media">      
+          {% for medium in tweet['entities']['media'] %}
+            
+            {% if medium['type'] == "photo" %}
+               <h4>Photo:</h4>
+               <img src="{{medium['media_url']}}" 
+                                      height="{{medium['sizes']['thumb']['h']}}" 
+                                      width="{{medium['sizes']['thumb']['w']}}" 
+               >
+            {% else %}
+                <h4>{{ medium['type'] }}</h4>
+            {% endif %}          
+          {% endfor %}
+          </div>
       </li>      
   
-      <!--<ul>      
-      {% for medium in tweet['entities']['media'] %}
-        <li> <b>{{ medium }}</b> </li>
-      {% endfor %}
-      </ul>-->
+      
     {% endfor %}
     </ul>
 {% else %}
   <p>Nothing to look for :(.</p>
 {% endif %}
+</body>
+</html>
