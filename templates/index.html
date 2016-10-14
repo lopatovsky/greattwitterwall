@@ -5,7 +5,25 @@
   <h2>Tweets for the #{{ word }}!</h2>
     <ul>
     {% for tweet in tweets_list %}
-      <li>{{ tweet }}</li>
+      <li>
+         <h3 class="username">{{ tweet['user']['name'] }}</h3>
+         <img src="{{ tweet['user']['profile_image_url'] }}">
+         <p class="time_created"> {{ tweet['created_at'] }}</p>
+         <p class ="hashtags">         
+         {% for hashtag in tweet['entities']['hashtags'] %}
+            <span class ="hashtag">
+            <a href="/{{hashtag['text']}}/" > #{{hashtag['text']}} </a>
+            </span>         
+         {% endfor %} 
+          </p>         
+          <p class="text"> {{ tweet['text'] }}</p>
+      </li>      
+  
+      <!--<ul>      
+      {% for medium in tweet['entities']['media'] %}
+        <li> <b>{{ medium }}</b> </li>
+      {% endfor %}
+      </ul>-->
     {% endfor %}
     </ul>
 {% else %}
