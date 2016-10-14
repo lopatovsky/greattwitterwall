@@ -99,6 +99,9 @@ def console(  word, cfg_file,  begin , period, lang ):
 from flask import Flask
 app = Flask(__name__)
 
+
+
+
 @app.route('/')
 def hello():
     return 'MI-PYT je nejlepší předmět na FITu!'
@@ -110,7 +113,6 @@ def hello():
 @cli.command()
 def web():
   """Run the web application"""
-  pass
   app.run(debug=True)
 
 
