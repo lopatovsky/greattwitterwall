@@ -54,6 +54,9 @@ def get_secrets( file_name ):
 
 
 
+
+
+
 def get_twitter_wall( session, word, begin, period, lang ):
 
     max_id = 0
@@ -100,14 +103,17 @@ from flask import Flask
 app = Flask(__name__)
 
 @app.route('/')
-def hello():
-    return 'MI-PYT je nejlepší předmět na FITu!'
+def index():
+    return 'MI-PYT cool Twitter wall'
+
+@app.route('/<word>/')
+def find_word(word):
+    return 'Find ' + word
 
 @cli.command()
 def web():
     """Run the web application"""
-    app.run(debug=True)
-
+    app.run(debug=True) #TODO switch off debug for deployment
 
 
 if __name__ == '__main__':
