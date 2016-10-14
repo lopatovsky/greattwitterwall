@@ -106,7 +106,12 @@ app = Flask(__name__)
 @app.route('/')
 @app.route('/<word>/')
 def index(word=None):
-    return render_template('index.html', word=word)
+    r=None
+    if word:
+        session = twitter_session( *get_secrets( 'auth.cfg' ) )
+        r = session.get('https://api.twitter.com/1.1/search/tweets.json',
+                        params={'q': '#'+word, 'count': 10, 'result_type': 'recent',}, )
+    return render_template('index.html', word=word, tweets_list=r.json()['statuses']  )
 
 @cli.command()
 def web():
