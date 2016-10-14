@@ -23,59 +23,59 @@ import click
 
 def twitter_session(api_key, api_secret):
 
-  session = requests.Session()
-  secret = '{}:{}'.format(api_key, api_secret)
-  secret64 = base64.b64encode(secret.encode('ascii')).decode('ascii')
+    session = requests.Session()
+    secret = '{}:{}'.format(api_key, api_secret)
+    secret64 = base64.b64encode(secret.encode('ascii')).decode('ascii')
 
-  headers = {
-    'Authorization': 'Basic {}'.format(secret64),
-    'Host': 'api.twitter.com',
-  }
+    headers = {
+        'Authorization': 'Basic {}'.format(secret64),
+        'Host': 'api.twitter.com',
+    }
 
-  r = session.post('https://api.twitter.com/oauth2/token',
+    r = session.post('https://api.twitter.com/oauth2/token',
                    headers=headers,
                    data={'grant_type': 'client_credentials'})
 
-  bearer_token = r.json()['access_token']
+    bearer_token = r.json()['access_token']
 
-  def bearer_auth(req):
-      req.headers['Authorization'] = 'Bearer ' + bearer_token
-      return req
+    def bearer_auth(req):
+        req.headers['Authorization'] = 'Bearer ' + bearer_token
+        return req
 
-  session.auth = bearer_auth
-  return session
+    session.auth = bearer_auth
+    return session
 
 
 def get_secrets( file_name ):
 
-  config = configparser.ConfigParser()
-  config.read( file_name )
-  return ( config['twitter']['key'], config['twitter']['secret'] )
+    config = configparser.ConfigParser()
+    config.read( file_name )
+    return ( config['twitter']['key'], config['twitter']['secret'] )
 
 
 
 def get_twitter_wall( session, word, begin, period, lang ):
 
-  max_id = 0
+    max_id = 0
 
-  while( True ):
+    while( True ):
 
-    r = session.get('https://api.twitter.com/1.1/search/tweets.json',
-                    params={'q': '#'+word, 'count': begin, 'result_type': 'recent',
-                    'since_id': max_id, 'lang' : lang }, )
+        r = session.get('https://api.twitter.com/1.1/search/tweets.json',
+                        params={'q': '#'+word, 'count': begin, 'result_type': 'recent',
+                        'since_id': max_id, 'lang' : lang }, )
 
-    max_id = r.json()['search_metadata']['max_id']
-    begin = 100
+        max_id = r.json()['search_metadata']['max_id']
+        begin = 100
 
-    if ( len( r.json()['statuses']  ) > 0 ):
+        if ( len( r.json()['statuses']  ) > 0 ):
 
-      print( 10 * '*' ,  time.strftime("%H:%M:%S", time.gmtime()) , 10 * '*'  )
+            print( 10 * '*' ,  time.strftime("%H:%M:%S", time.gmtime()) , 10 * '*'  )
 
-      for tweet in r.json()['statuses']:
-        print(tweet['text'])
-        print (20 * '-')
+            for tweet in r.json()['statuses']:
+                print(tweet['text'])
+                print (20 * '-')
 
-    time.sleep(period)
+        time.sleep(period)
 
 
 
@@ -90,34 +90,27 @@ def cli():
 @click.option('--period', default=5 , help='Set update period for new tweets (seconds).')
 @click.option('--lang', default='en' , help='Specify the language of tweets [en,cs,zh... ].')
 def console(  word, cfg_file,  begin , period, lang ):
-  """Run the console application"""
-  session = twitter_session( *get_secrets( cfg_file ) )
-  get_twitter_wall( session, word, begin, period, lang )
+    """Run the console application"""
+    session = twitter_session( *get_secrets( cfg_file ) )
+    get_twitter_wall( session, word, begin, period, lang )
 
 ############web_application########################################################################
 
 from flask import Flask
 app = Flask(__name__)
 
-
-
-
 @app.route('/')
 def hello():
     return 'MI-PYT je nejlepší předmět na FITu!'
 
-
-
-
-
 @cli.command()
 def web():
-  """Run the web application"""
-  app.run(debug=True)
+    """Run the web application"""
+    app.run(debug=True)
 
 
 
 if __name__ == '__main__':
 
-  cli()
+    cli()
 
