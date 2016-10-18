@@ -134,7 +134,7 @@ def prepare_data( r ):
 @app.route('/')
 @app.route('/<word>/')
 def index(word=None):
-    r=None
+    data=None
     if word:
         session = twitter_session( *get_secrets( 'auth.cfg' ) )
         r = session.get('https://api.twitter.com/1.1/search/tweets.json',
