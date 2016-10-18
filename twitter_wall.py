@@ -128,9 +128,6 @@ def prepare_data( r ):
         d['text'] = text
         d['text2'] = tweet['text']
 
-        #for ht in tweet['entities']['hashtags']:
-        #   print ( ht['text'] )
-        #    print ( ht['indices'] )
         data.append(d)
 
     return data
