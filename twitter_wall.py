@@ -53,10 +53,6 @@ def get_secrets( file_name ):
     return ( config['twitter']['key'], config['twitter']['secret'] )
 
 
-
-
-
-
 def get_twitter_wall( session, word, begin, period, lang ):
 
     max_id = 0
@@ -103,6 +99,43 @@ from flask import Flask
 from flask import render_template
 app = Flask(__name__)
 
+def prepare_data( r ):
+    data = []
+
+    for tweet in r:
+        d = {}
+        d['name'] = tweet['user']['name']
+        d['profile_image_url'] = tweet['user']['profile_image_url']
+        d['created_at'] = tweet['created_at']
+        d['retweeted'] = tweet['retweeted']
+        s = tweet['text']
+        if 'media' in tweet['entities']:
+            d['media'] = tweet['entities']['media']
+
+        entities = tweet['entities']['hashtags']
+        entities +=tweet['entities']['urls']
+        entities +=tweet['entities']['user_mentions']
+        entities.sort( key = lambda c: c['indices'][0] )
+
+        b = 0
+        text = []
+        for ent in entities:
+            text.append( s[b:ent['indices'][0] ] )
+            text.append( ent )
+            b = ent['indices'][1]
+        text.append(s[b:])
+
+        d['text'] = text
+        d['text2'] = tweet['text']
+
+        #for ht in tweet['entities']['hashtags']:
+        #   print ( ht['text'] )
+        #    print ( ht['indices'] )
+        data.append(d)
+
+    return data
+
+
 @app.route('/')
 @app.route('/<word>/')
 def index(word=None):
@@ -112,7 +145,11 @@ def index(word=None):
         r = session.get('https://api.twitter.com/1.1/search/tweets.json',
                         params={'q': '#'+word, 'count': 10, 'result_type': 'recent',},
                        ).json()['statuses']
-    return render_template('index.html', word=word, tweets_list=r  )
+
+        data = prepare_data(r)
+
+
+    return render_template('index.html', word=word, tweets_list=data  )
 
 @cli.command()
 def web():
