@@ -107,7 +107,6 @@ def prepare_data( r ):
         d['name'] = tweet['user']['name']
         d['profile_image_url'] = tweet['user']['profile_image_url']
         d['created_at'] = tweet['created_at']
-        d['retweeted'] = tweet['retweeted']
         s = tweet['text']
         if 'media' in tweet['entities']:
             d['media'] = tweet['entities']['media']
@@ -126,7 +125,6 @@ def prepare_data( r ):
         text.append(s[b:])
 
         d['text'] = text
-        d['text2'] = tweet['text']
 
         data.append(d)
 
