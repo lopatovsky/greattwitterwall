@@ -103,6 +103,10 @@ def for_test():
   for i, word in enumerate(["welcome", "to", "python"]):
     print(i, word)
 
+  x = (2,5,4,3,6);
+  for i in reversed(x):
+    print(i)
+
   print( list( range(5) ) )
   print( list( range(4,6) ) )
   print( list( range(1,7,2) ) )
@@ -120,6 +124,17 @@ def print_test():
 def input_test():
   answer = input('Zadej text: ')
   print('Zadal si', answer )
+
+
+def super_sum( a, b ,c):
+    return a+b+c
+
+def operator_star():
+    a = 1,2,3
+    b = [1,2,3]
+    print( super_sum(*a) )
+    print( super_sum(*b) )
+
 
 ### class MojeTridaEx( Exception ):   # dedeni
 '''
@@ -164,5 +179,6 @@ if __name__ == '__main__':
 
   print( dir( 'ahoj' ) )  ## GET all methods and magic methods
 
+  operator_star()
 
 
