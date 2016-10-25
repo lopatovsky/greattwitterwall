@@ -21,6 +21,9 @@ import configparser
 import time
 import click
 
+def suma( a, b):
+  return a+b
+
 def twitter_session(api_key, api_secret):
 
     session = requests.Session()
@@ -152,7 +155,6 @@ def web():
     app.run(debug=True) #TODO switch off debug for deployment
 
 
-if __name__ == '__main__':
-
+def main():
     cli()
 

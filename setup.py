@@ -1,11 +1,11 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 with open('README') as f:
     long_description = ''.join(f.readlines())
 
 setup(
     name='greattwitterwall',
-    version='0.3',
+    version='0.3.1',
     description='Search for the tweets and display them as the web app.',
     long_description=long_description,
     keywords='twitter,search,web',
@@ -13,7 +13,14 @@ setup(
     author_email='lopatovsky@gmail.com',
     license='Public Domain',
     url='https://github.com/lopatovsky/greattwitterwall',
-    py_modules=['greattwitterwall'],
+    packages=find_packages(),
+    entry_points={
+        'console_scripts': [
+            'greattwitterwall = greattwitterwall.greattwitterwall:main',
+        ],
+    },
+    install_requires=['Flask', 'click>=6', 'itsdangerous>=0.24' , 'Jinja2>=2.8',
+                      'MarkupSafe>=0.23', 'pkg-resources', 'requests>=2.11.1', 'Werkzeug>=0.11.11' ],
     classifiers=[
         'License :: Public Domain',
         'Operating System :: POSIX :: Linux',
