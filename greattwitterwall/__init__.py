@@ -1,3 +1,3 @@
-from .greattwitterwall import suma
+from .greattwitterwall import cli
 
-__all__ = ['suma']
+__all__ = ['cli']

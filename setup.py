@@ -5,7 +5,7 @@ with open('README') as f:
 
 setup(
     name='greattwitterwall',
-    version='0.3.1',
+    version='0.3.2',
     description='Search for the tweets and display them as the web app.',
     long_description=long_description,
     keywords='twitter,search,web',
@@ -29,4 +29,7 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',
         ],
+    package_data={
+        'greattwitterwall': ['templates/*.html'],
+    }
 )
