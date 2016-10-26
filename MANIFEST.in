@@ -1,3 +1,2 @@
 include LICENSE
-include greattwitterwall/templates/*html
-include greattwitterwall/*py
+

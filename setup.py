@@ -14,6 +14,7 @@ setup(
     license='Public Domain',
     url='https://github.com/lopatovsky/greattwitterwall',
     packages=find_packages(),
+    zip_safe=False,    
     entry_points={
         'console_scripts': [
             'greattwitterwall = greattwitterwall.greattwitterwall:main',
