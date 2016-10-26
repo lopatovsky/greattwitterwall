@@ -5,9 +5,10 @@ MI-PYT homeworks
 ## HW 3
 
 test pypi:  greattwitterwall
+run from command line:
 ```
-run > greattwitterwall console
-    > greattwitterwall web
+ $> greattwitterwall console
+ $> greattwitterwall web
 ```
 
 for the web create the file "auth.cfg" in the form:
