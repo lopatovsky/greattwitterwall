@@ -152,7 +152,7 @@ def index(word=None):
 @cli.command()
 def web():
     """Run the web application"""
-    app.run(debug=True) #TODO switch off debug for deployment
+    app.run(debug=False) #TODO switch off debug for deployment
 
 
 def main():
