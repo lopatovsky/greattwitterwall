@@ -13,3 +13,24 @@ def test_suma(a, gen_b ):
     #flexmock(gtw, suma=9 )
     s = gtw.suma(a,gen_b)
     assert (s == a+gen_b)
+
+
+"""
+import betamax
+
+with betamax.Betamax.configure() as config:
+    config.cassette_library_dir = 'tests/fixtures/cassettes'
+
+def test_get(betamax_session):
+    betamax_session.get('https://httpbin.org/get')
+
+
+class Client:
+    def __init__(self, session=None):
+        self.session = session or requests.Session()
+
+
+def test_search(betamax_session):
+    client = Client(betamax_session)
+    assert client.foo() == 42
+"""

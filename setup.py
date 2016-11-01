@@ -14,7 +14,7 @@ setup(
     license='Public Domain',
     url='https://github.com/lopatovsky/greattwitterwall',
     packages=find_packages(),
-    zip_safe=False,    
+    zip_safe=False,
     entry_points={
         'console_scripts': [
             'greattwitterwall = greattwitterwall.greattwitterwall:main',
@@ -22,6 +22,8 @@ setup(
     },
     install_requires=['Flask', 'click>=6', 'itsdangerous>=0.24' , 'Jinja2>=2.8',
                       'MarkupSafe>=0.23', 'requests>=2.11.1' ],
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest', 'flexmock' ],
     classifiers=[
         'License :: Public Domain',
         'Operating System :: POSIX :: Linux',
