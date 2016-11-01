@@ -8,3 +8,5 @@ env/
 dist/
 build/
 *.egg-info
+notes
+.cache/

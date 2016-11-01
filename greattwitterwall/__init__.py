@@ -1,3 +1,3 @@
-from .greattwitterwall import cli
+from .greattwitterwall import *
 
 __all__ = ['cli']

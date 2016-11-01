@@ -21,7 +21,7 @@ setup(
         ],
     },
     install_requires=['Flask', 'click>=6', 'itsdangerous>=0.24' , 'Jinja2>=2.8',
-                      'MarkupSafe>=0.23', 'pkg-resources', 'requests>=2.11.1', 'Werkzeug>=0.11.11' ],
+                      'MarkupSafe>=0.23', 'requests>=2.11.1' ],
     classifiers=[
         'License :: Public Domain',
         'Operating System :: POSIX :: Linux',
