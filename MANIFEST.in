@@ -1,2 +1,3 @@
 include LICENSE
-
+include setup.cfk
+recursive-include tests *.py
