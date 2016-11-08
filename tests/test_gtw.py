@@ -1,5 +1,6 @@
 import pytest
 import greattwitterwall as gtw
+# moze sa to importovat znovu od nova from .greattwitterwall import *,  potom v __init__.py nemusi byt *, ale len verejne rozhranie.
 import flexmock
 
 

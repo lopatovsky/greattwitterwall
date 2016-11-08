@@ -103,6 +103,7 @@ from flask import render_template
 app = Flask(__name__)
 
 def prepare_data( r ):
+    """foo"""
     data = []
 
     for tweet in r:

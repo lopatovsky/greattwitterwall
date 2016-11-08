@@ -11,3 +11,4 @@ build/
 notes
 .cache/
 .eggs/
+docs/_build/
