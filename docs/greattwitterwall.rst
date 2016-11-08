@@ -1,4 +1,22 @@
-Great Twitter wall
-==================
+greattwitterwall package
+========================
 
-hello
+Submodules
+----------
+
+greattwitterwall.greattwitterwall module
+----------------------------------------
+
+.. automodule:: greattwitterwall.greattwitterwall
+    :members:
+    :undoc-members:
+    :show-inheritance:
+
+
+Module contents
+---------------
+
+.. automodule:: greattwitterwall
+    :members:
+    :undoc-members:
+    :show-inheritance:

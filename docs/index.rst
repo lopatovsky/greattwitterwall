@@ -10,11 +10,14 @@ Contents:
 
 .. toctree::
    :maxdepth: 2
+   
+   modules
+    
+   delete this:
 
-   intro
    parot
-   greattwitterwall
-  
+   greattwitterwall2
+   intro
 
 
 Indices and tables
