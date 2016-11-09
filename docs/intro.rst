@@ -19,7 +19,7 @@ Use the web frontend to format searched tweets in more readible way.
 -  Sources:
    `Testpypi <https://testpypi.python.org/pypi?%3Aaction=pkg_edit&name=greattwitterwall>`__,
    `Github <https://github.com/lopatovsky/greattwitterwall>`__,
-   `Read The Docs <>`__.
+   `Read The Docs <https://readthedocs.org/projects/greattwitterwall/>`__.
 
 If you only want to use it for searching tweets or see its functionality, you can find it `here <http://jamaisvu.pythonanywhere.com/MI-PYT/>`__. 
 
