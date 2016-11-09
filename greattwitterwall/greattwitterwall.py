@@ -1,19 +1,9 @@
-'''
+"""
 Twitter Wall
 
-Twitter Wall pro terminál. Aplikace, která bude zobrazovat tweety odpovídající určitému hledání do terminálu v nekonečné smyčce.
-
-Aplikace načte určitý počet tweetů odpovídající hledanému výrazu, zobrazí je a v nějakém intervalu se bude dotazovat na nové tweety (použijte API argument since_id).
-
-Pomocí argumentů půjde nastavit:
-
-cesta ke konfiguračnímu souboru s přístupovými údaji
-hledaný výraz
-počet na začátku načtených tweetů
-časový interval dalších dotazů
-nějaké vlastnosti ovlivňující chování (např. zda zobrazovat retweety)
-
-'''
+This is Great twitter wall, welcome!
+:ref:`documentation`.
+"""
 
 import requests
 import base64
@@ -22,9 +12,17 @@ import time
 import click
 
 def suma( a, b):
+  """ This function has nothing to do with the twitter-wall application.
+  Use this function to sum two numbers, in case you find the + operator too mainstream.
+
+  """
+
   return a+b
 
 def twitter_session(api_key, api_secret):
+    """The function takes the twitter api key and secret and return the session.
+    If you do not know what the api secret and key are, see :ref:`api-secret-key`.
+    """
 
     session = requests.Session()
     secret = '{}:{}'.format(api_key, api_secret)
@@ -50,6 +48,7 @@ def twitter_session(api_key, api_secret):
 
 
 def get_secrets( file_name ):
+    """Function parse the file and optain the twitter api key and secret :ref:`api-secret-key`. """
 
     config = configparser.ConfigParser()
     config.read( file_name )
@@ -57,7 +56,7 @@ def get_secrets( file_name ):
 
 
 def get_twitter_wall( session, word, begin, period, lang ):
-
+    """The function takes the search properties and periodically apply and print the newest tweets."""
     max_id = 0
 
     while( True ):
@@ -103,7 +102,7 @@ from flask import render_template
 app = Flask(__name__)
 
 def prepare_data( r ):
-    """foo"""
+    """The function takes the row output of twitter api and transform it to the form usefull to render html page."""
     data = []
 
     for tweet in r:
@@ -122,12 +121,13 @@ def prepare_data( r ):
 
         b = 0
         text = []
+
         for ent in entities:
             text.append( s[b:ent['indices'][0] ] )
             text.append( ent )
             b = ent['indices'][1]
         text.append(s[b:])
-
+        
         d['text'] = text
 
         data.append(d)
@@ -138,6 +138,7 @@ def prepare_data( r ):
 @app.route('/')
 @app.route('/<word>/')
 def index(word=None):
+    """The function takes the searched word (if any) and try to get the data from twitter and render the otput html file."""
     data=None
     if word:
         session = twitter_session( *get_secrets( 'auth.cfg' ) )

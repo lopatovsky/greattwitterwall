@@ -72,5 +72,24 @@ use the ``--help`` option to get more information.
 
 delete me ref :ref:`api-secret-key`
 
+Examples
+~~~~~~~~
+
+.. testsetup::
+
+   import greattwitterwall as gtw
+
+.. doctest::
+
+   >>> gtw.suma(5,6)
+   11
+   
+   >>> gtw.suma(-4,3)
+   -1
+
+
+Other examples may be added in future.
+
+
 
 

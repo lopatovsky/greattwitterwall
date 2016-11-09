@@ -5,7 +5,7 @@ with open('README') as f:
 
 setup(
     name='greattwitterwall',
-    version='0.4.1',
+    version='0.5',
     description='Search for the tweets and display them as the web app.',
     long_description=long_description,
     keywords='twitter,search,web',

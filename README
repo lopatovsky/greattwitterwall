@@ -1,13 +1,33 @@
-# MI-PYT
 MI-PYT homeworks
+================
 
-----------------
-## HW 4
+HW 5 Documentation
+~~~~~~~~~~~~~~~~~~
 
+Install the requirments
+
+``pip install -r docs/requirements.txt``
+
+Go into the docs dictionary
+
+``cd docs``
+
+Generate HTML documentation
+
+``make html``
+
+Run doctest
+
+``make doctest``
+
+
+HW 4
+~~~~
 version 0.4.1 - 
 Contain only one simple test, do not look for other.
 
-## HW 3
+HW 3
+~~~~
 
 test pypi:  greattwitterwall
 run from command line:
@@ -22,7 +42,7 @@ for the web create the file "auth.cfg" in the form:
 key = XXXX
 secret = YYYY
 ```
-## Great Twitter Wall
+Great Twitter Wall
 
 Link to the application:
 
