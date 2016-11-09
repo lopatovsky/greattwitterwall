@@ -1,33 +1,76 @@
 Intro
 =======
 
-Bla
+The Greattwitterwall is the Twitter based application, that anable the search
+of the key-words in most recent tweets.
 
-.. _my-reference-label:
+The project rised as the part of the homework serie for MI-PYT at FIT CTU in Prague.
+
+The Program operates in two modes:
+
+-  The Console Application:
+
+Anable to search for the tweets, refreshing in the realtime, when new tweet with the searching keyword arise.  
+
+-  The Web Application:  
+
+Use the web frontend to format searched tweets in more readible way.
+
+-  Sources:
+   `Testpypi <https://testpypi.python.org/pypi?%3Aaction=pkg_edit&name=greattwitterwall>`__,
+   `Github <https://github.com/lopatovsky/greattwitterwall>`__,
+   `Read The Docs <>`__.
+
+If you only want to use it for searching tweets or see its functionality, you can find it `here <http://jamaisvu.pythonanywhere.com/MI-PYT/>`__. 
+
+Feel free to mend the url in any form to search for desired key-words.
+
+``http://jamaisvu.pythonanywhere.com/{searched word}/`` 
+
+Requirements
+~~~~~~~~~~~~
+
+-  python 3.5
+-  libraries: `click <http://click.pocoo.org/6/>`__,
+   `flask <http://flask.pocoo.org/>`__,
+   `requests <http://docs.python-requests.org/en/master/>`__,
+   `jinja2 <http://jinja.pocoo.org/docs/dev/>`__,   
 
 
-Subsection
-===========
+.. _api-secret-key:
 
-find it here :ref:`my-reference-label`.
+Download & Install
+~~~~~~~~~~~~~~~~~~
 
-you can use like this::
+You can install the package directly from test pypi by command:
 
-   import xxx
-   
-   bar.foo()
-  
-bla bla test-test
+``$ python -m pip install --extra-index-url https://testpypi.python.org/pypi greattwitterwall``
 
->>> 1 + 1
-2
+Or download at `Github <https://github.com/lopatovsky/greattwitterwall>`__ and install from source:
 
+``$ python setup.py install``
 
-bla bla:
+To succesfully run the program, you need to create the file "auth.cfg" in the main directory in the form ::
 
-to do >>> import greattwitterwall
-to do >>> 
+   [twitter]
+   key = XXXX
+   secret = YYYY
 
+You can get twitter key and secret by registering the app `here <https://apps.twitter.com/>`__.
+
+Usage
+~~~~~
+
+You may launch the console or web application by command: 
+
+``$ greattwitterwall console``
+
+``$ greattwitterwall web``
+
+Then just follow the prompt questions or
+use the ``--help`` option to get more information.
+
+delete me ref :ref:`api-secret-key`
 
 
 
